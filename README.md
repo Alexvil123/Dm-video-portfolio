@@ -42,6 +42,18 @@ A world-class, ultra-modern **Light Theme Portfolio** designed specifically for 
 
 ---
 
+## Deploy on Vercel
+
+Import `Alexvil123/Dm-video-portfolio` from GitHub and deploy the `main` branch.
+Keep the Root Directory at the repository root (`./`). The included
+`vercel.json` configures this as a static HTML/CSS/JavaScript website with no
+install or build command and serves files from the repository root.
+`server.js` is only for local preview; Vercel serves the static website directly.
+
+If the repository is missing from Vercel's import list, update the Vercel
+GitHub App's repository access to include `Dm-video-portfolio`, then refresh
+the import page.
+
 ## 🚀 How to Run the Website Locally
 
 You already have the local server running at:
