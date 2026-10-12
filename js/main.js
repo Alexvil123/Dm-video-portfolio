@@ -134,8 +134,37 @@ document.addEventListener('DOMContentLoaded', () => {
   // 3. ACCESSIBLE IMAGE LIGHTBOX
   const lightbox = document.getElementById('image-lightbox');
   const closeImage = document.getElementById('image-lightbox-close');
+  const projectVideo = document.getElementById('project-video');
+  const mediaStatus = document.getElementById('media-status');
+  const photo = document.getElementById('image-lightbox-photo');
+  const originalLink = document.getElementById('image-original-link');
+  const resetVideo = () => {
+    projectVideo.pause();
+    projectVideo.removeAttribute('src');
+    projectVideo.load();
+    projectVideo.hidden = true;
+  };
+  projectVideo.addEventListener('error', () => {
+    if (lightbox.hidden || !projectVideo.getAttribute('src')) return;
+    projectVideo.pause();
+    projectVideo.hidden = true;
+    photo.hidden = false;
+    originalLink.href = photo.src;
+    originalLink.textContent = 'Open full image ↗';
+    mediaStatus.textContent = 'This video is unavailable. You can still explore the project image.';
+    mediaStatus.hidden = false;
+  });
+  projectCards.forEach((card, index) => {
+    const frame = document.createElement('span');
+    frame.className = 'frame-index';
+    frame.textContent = 'FRAME / ' + String(index + 1).padStart(2, '0');
+    frame.setAttribute('aria-hidden', 'true');
+    card.querySelector('.project-image')?.append(frame);
+    card.querySelectorAll('.view-edit-link span').forEach(label => { label.textContent = 'Explore project'; });
+  });
   let imageTrigger;
   const closeLightbox = () => {
+    resetVideo();
     lightbox.hidden = true;
     document.body.style.overflow = '';
     imageTrigger?.focus();
@@ -151,12 +180,31 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     button.addEventListener('click', () => {
       imageTrigger = button;
-      const photo = document.getElementById('image-lightbox-photo');
+      resetVideo();
+      mediaStatus.hidden = true;
+      mediaStatus.textContent = '';
+      const card = button.closest('.project-card');
+      const videoUrl = button.dataset.video || card?.dataset.video || '';
       photo.src = button.dataset.image;
       photo.alt = button.dataset.title;
+      photo.hidden = Boolean(videoUrl);
+      if (videoUrl) {
+        projectVideo.poster = button.dataset.image;
+        projectVideo.src = videoUrl;
+        projectVideo.hidden = false;
+        projectVideo.load();
+      }
       document.getElementById('image-lightbox-title').textContent = button.dataset.title;
       document.getElementById('image-lightbox-category').textContent = button.dataset.category || 'Selected work';
-      document.getElementById('image-original-link').href = button.dataset.image;
+      originalLink.href = videoUrl || button.dataset.image;
+      originalLink.textContent = videoUrl ? 'Open full video ↗' : 'Open full image ↗';
+      const story = document.getElementById('project-story');
+      story.hidden = !card;
+      document.getElementById('project-story-description').textContent = card?.querySelector('.project-desc')?.textContent.trim() || '';
+      const tags = document.getElementById('project-story-tags');
+      tags.replaceChildren();
+      card?.querySelectorAll('.edit-tag').forEach(tag => tags.append(tag.cloneNode(true)));
+      document.getElementById('project-story-software').textContent = button.dataset.software || '';
       lightbox.hidden = false;
       document.body.style.overflow = 'hidden';
       closeImage.focus();
@@ -168,9 +216,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (lightbox.hidden) return;
     if (event.key === 'Escape') closeLightbox();
     if (event.key === 'Tab') {
-      const last = document.getElementById('image-original-link');
-      if (event.shiftKey && document.activeElement === closeImage) { event.preventDefault(); last.focus(); }
-      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); closeImage.focus(); }
+      const focusable = [...lightbox.querySelectorAll('button, a[href], video[controls]')].filter(el => !el.hidden && el.getClientRects().length);
+      const first = focusable[0], last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
     }
   });
 

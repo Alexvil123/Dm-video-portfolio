@@ -75,6 +75,10 @@ Then open `http://localhost:3000` or double-click `index.html` in your browser!
 
 ## 🎥 How to Replace Preview Images with Real Videos
 
+For the current gallery and hero, follow [MEDIA-GUIDE.md](MEDIA-GUIDE.md).
+Fill the empty `data-video` attribute to enable the built-in video preview;
+the existing image remains its poster.
+
 Whenever you have real videos ready (.mp4 files or YouTube embeds):
 
 ### 1. For Local MP4 Video Files:

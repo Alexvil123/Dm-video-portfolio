@@ -120,15 +120,15 @@
           <div class="hero-visual image-composition">
   <span class="composition-label">THE ART OF PAYING ATTENTION / VOL. 01</span>
   <div class="creative-seal" aria-hidden="true"><span>BUILT TO</span><b>✳</b><span>MAKE YOU FEEL</span></div>
-  <button class="image-tile image-tile-main open-image-btn" data-image="assets/images/hero_showreel.jpg" data-title="Behind the frame" data-category="Visual storytelling" aria-label="View Behind the frame image">
+  <button class="image-tile image-tile-main open-image-btn" data-video="" data-image="assets/images/hero_showreel.jpg" data-title="Behind the frame" data-category="Visual storytelling" aria-label="View Behind the frame image">
     <img src="assets/images/hero_showreel.jpg" alt="Cinematographer capturing a scene on a film set" fetchpriority="high">
     <span class="image-caption"><span>01 / BEHIND THE FRAME</span><span aria-hidden="true">↗</span></span>
   </button>
-  <button class="image-tile image-tile-landscape open-image-btn" data-image="assets/images/travel_documentary.jpg" data-title="A different perspective" data-category="Cinematic landscapes" aria-label="View cinematic landscape image">
+  <button class="image-tile image-tile-landscape open-image-btn" data-video="" data-image="assets/images/travel_documentary.jpg" data-title="A different perspective" data-category="Cinematic landscapes" aria-label="View cinematic landscape image">
     <img src="assets/images/travel_documentary.jpg" alt="Alpine landscape with glacial water and mountain peaks">
     <span class="image-caption"><span>02 / WILD PERSPECTIVES</span><span aria-hidden="true">↗</span></span>
   </button>
-  <button class="image-tile image-tile-portrait open-image-btn" data-image="assets/images/vertical_reel_1.jpg" data-title="Life in motion" data-category="Streetwear & lifestyle" aria-label="View streetwear image">
+  <button class="image-tile image-tile-portrait open-image-btn" data-video="" data-image="assets/images/vertical_reel_1.jpg" data-title="Life in motion" data-category="Streetwear & lifestyle" aria-label="View streetwear image">
     <img src="assets/images/vertical_reel_1.jpg" alt="Urban streetwear portrait">
     <span class="image-caption"><span>03 / IN THE CITY</span><span aria-hidden="true">↗</span></span>
   </button>
@@ -221,7 +221,7 @@
         <div class="projects-grid" id="projects-grid">
           
           <!-- Project 1: Commercial (16:9) -->
-          <article class="project-card card-span-7" data-category="commercial">
+          <article class="project-card card-span-7" data-category="commercial" data-video="">
             <div class="card-media-wrapper">
               
               <div class="project-image open-image-btn"
@@ -273,7 +273,7 @@
           </article>
 
           <!-- Project 2: YouTube Narrative (16:9) -->
-          <article class="project-card card-span-5" data-category="youtube">
+          <article class="project-card card-span-5" data-category="youtube" data-video="">
             <div class="card-media-wrapper">
               
               <div class="project-image open-image-btn"
@@ -325,7 +325,7 @@
           </article>
 
           <!-- Project 3: Vertical Reel 1 (9:16) -->
-          <article class="project-card card-vertical" data-category="reels">
+          <article class="project-card card-vertical" data-category="reels" data-video="">
             <div class="card-media-wrapper">
               
               <div class="project-image aspect-vertical open-image-btn"
@@ -375,7 +375,7 @@
           </article>
 
           <!-- Project 4: Vertical Reel 2 (9:16) -->
-          <article class="project-card card-vertical" data-category="reels">
+          <article class="project-card card-vertical" data-category="reels" data-video="">
             <div class="card-media-wrapper">
               
               <div class="project-image aspect-vertical open-image-btn"
@@ -425,7 +425,7 @@
           </article>
 
           <!-- Project 5: Music Video & Stage (16:9) -->
-          <article class="project-card card-span-4" data-category="cinematic">
+          <article class="project-card card-span-4" data-category="cinematic" data-video="">
             <div class="card-media-wrapper">
               
               <div class="project-image open-image-btn"
@@ -475,7 +475,7 @@
           </article>
 
           <!-- Project 6: Nature / Travel Documentary (16:9) -->
-          <article class="project-card card-span-12" data-category="cinematic">
+          <article class="project-card card-span-12" data-category="cinematic" data-video="">
             <div class="card-media-wrapper">
               
               <div class="project-image open-image-btn"
@@ -884,6 +884,12 @@
   <div class="image-lightbox-window">
     <div class="image-lightbox-header"><div><p id="image-lightbox-category"></p><h2 id="image-lightbox-title"></h2></div><button type="button" id="image-lightbox-close" aria-label="Close image preview">×</button></div>
     <img id="image-lightbox-photo" alt="">
+    <video id="project-video" controls playsinline preload="none" tabindex="0" aria-label="Project video" hidden></video>
+    <p class="media-status" id="media-status" role="status" hidden></p>
+    <div class="project-story" id="project-story" hidden>
+      <div><span class="story-eyebrow">BEHIND THE FRAME</span><p id="project-story-description"></p></div>
+      <div><span class="story-eyebrow">CREATIVE TOOLKIT</span><div class="project-story-tags" id="project-story-tags"></div><p class="project-story-software" id="project-story-software"></p></div>
+    </div>
     <div class="image-lightbox-footer"><span>THE DETAILS MAKE THE DIFFERENCE.</span><a id="image-original-link" target="_blank" rel="noopener">Open full image ↗</a></div>
   </div>
 </div>
@@ -899,3 +905,4 @@
   <script src="js/main.js"></script>
 </body>
 </html>
+
