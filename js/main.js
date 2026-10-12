@@ -5,6 +5,37 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+  // Keep navigation grounded in the section being viewed.
+  const progress = document.querySelector('.reading-progress');
+  let scrollPending = false;
+  const syncProgress = () => {
+    const length = document.documentElement.scrollHeight - window.innerHeight;
+    if (progress) progress.style.transform = `scaleX(${length > 0 ? Math.min(1, window.scrollY / length) : 0})`;
+    scrollPending = false;
+  };
+  window.addEventListener('scroll', () => {
+    if (!scrollPending) { scrollPending = true; requestAnimationFrame(syncProgress); }
+  }, { passive: true });
+  window.addEventListener('resize', syncProgress);
+  syncProgress();
+  document.querySelectorAll('.project-image-thumb').forEach(image => {
+    image.loading = 'lazy'; image.decoding = 'async';
+  });
+  if ('IntersectionObserver' in window) {
+    const sectionObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        document.querySelectorAll('.nav-link').forEach(link => {
+          const current = link.getAttribute('href') === '#' + entry.target.id;
+          link.classList.toggle('is-current', current);
+          if (current) link.setAttribute('aria-current', 'location');
+          else link.removeAttribute('aria-current');
+        });
+      });
+    }, { rootMargin: '-15% 0px -60% 0px', threshold: 0 });
+    document.querySelectorAll('main section[id]').forEach(section => sectionObserver.observe(section));
+  }
+
   // -------------------------------------------------------------
   // 1. FILTER TABS LOGIC
   // -------------------------------------------------------------
