@@ -184,6 +184,10 @@ document.addEventListener('DOMContentLoaded', () => {
       mediaStatus.hidden = true;
       mediaStatus.textContent = '';
       const card = button.closest('.project-card');
+      const visibleProjects = [...projectCards].filter(project => project.style.display !== 'none');
+      const browser = document.getElementById('project-browser');
+      browser.hidden = !card || visibleProjects.length < 2;
+      document.getElementById('project-position').textContent = card ? `${String(visibleProjects.indexOf(card) + 1).padStart(2, '0')} / ${String(visibleProjects.length).padStart(2, '0')}` : '';
       const videoUrl = button.dataset.video || card?.dataset.video || '';
       photo.src = button.dataset.image;
       photo.alt = button.dataset.title;
@@ -211,10 +215,26 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
   closeImage.addEventListener('click', closeLightbox);
+  const browseProject = (direction, control) => {
+    const visibleProjects = [...projectCards].filter(project => project.style.display !== 'none');
+    const current = visibleProjects.indexOf(imageTrigger?.closest('.project-card'));
+    if (current < 0 || visibleProjects.length < 2) return;
+    const next = visibleProjects[(current + direction + visibleProjects.length) % visibleProjects.length];
+    next.querySelector('.project-image.open-image-btn').click();
+    control?.focus();
+  };
+  const previousProject = document.getElementById('previous-project');
+  const nextProject = document.getElementById('next-project');
+  previousProject.addEventListener('click', () => browseProject(-1, previousProject));
+  nextProject.addEventListener('click', () => browseProject(1, nextProject));
   lightbox.addEventListener('click', event => { if (event.target === lightbox) closeLightbox(); });
   document.addEventListener('keydown', event => {
     if (lightbox.hidden) return;
     if (event.key === 'Escape') closeLightbox();
+    if (['ArrowLeft', 'ArrowRight'].includes(event.key) && projectVideo.hidden && !document.getElementById('project-browser').hidden) {
+      event.preventDefault();
+      browseProject(event.key === 'ArrowRight' ? 1 : -1, event.key === 'ArrowRight' ? nextProject : previousProject);
+    }
     if (event.key === 'Tab') {
       const focusable = [...lightbox.querySelectorAll('button, a[href], video[controls]')].filter(el => !el.hidden && el.getClientRects().length);
       const first = focusable[0], last = focusable[focusable.length - 1];
