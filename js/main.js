@@ -155,6 +155,10 @@ document.addEventListener('DOMContentLoaded', () => {
     mediaStatus.hidden = false;
   });
   projectCards.forEach((card, index) => {
+    if (!card.dataset.video) {
+      const mediaBadge = card.querySelector('.project-duration-pill');
+      if (mediaBadge) mediaBadge.textContent = 'Image preview';
+    }
     const frame = document.createElement('span');
     frame.className = 'frame-index';
     frame.textContent = 'FRAME / ' + String(index + 1).padStart(2, '0');
