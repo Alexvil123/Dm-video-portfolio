@@ -15,6 +15,14 @@ document.addEventListener('DOMContentLoaded', () => {
   ];
   let galleryMood = 'original';
   let activeCard = null;
+  const summaries = [
+    'Coastal light, sculpted details and a sense of speed.',
+    'Warm light and close-up storytelling for a creator conversation.',
+    'Streetwear, city textures and bold visual rhythm.',
+    'A quiet coffee ritual, seen through texture and light.',
+    'Electric colour and the atmosphere of a live performance.',
+    'Mountain reflections, open space and cinematic stillness.'
+  ];
   const titleCase = value => value[0].toUpperCase() + value.slice(1);
   const applyCard = card => {
     const mood = galleryMood === 'original' ? 'cinematic' : galleryMood;
@@ -27,7 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
     status.textContent = `${titleCase(mood)} preview`;
   };
   cards.forEach((card, index) => {
-    const study = studies[index];
     const media = card.querySelector('.project-image');
     const number = document.createElement('span');
     number.className = 'sheet-number';
@@ -44,10 +51,9 @@ document.addEventListener('DOMContentLoaded', () => {
     tools.append(helper, toggle);
     card.querySelector('.card-media-wrapper').after(tools);
     toggle.addEventListener('click', () => { card.classList.toggle('grade-on'); applyCard(card); });
-    const note = document.createElement('div'); note.className = 'editor-note';
-    const label = document.createElement('span'); label.className = 'detail-eyebrow'; label.textContent = 'WHY THIS FRAME?';
-    const copy = document.createElement('p'); copy.textContent = study.note;
-    note.append(label, copy); card.querySelector('.project-footer-action').before(note);
+    const summary = document.createElement('p'); summary.className = 'project-summary';
+    summary.textContent = summaries[index];
+    card.querySelector('.project-desc').before(summary);
     applyCard(card);
   });
   document.querySelectorAll('[data-gallery-mood]').forEach(button => {

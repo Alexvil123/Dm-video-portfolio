@@ -2,8 +2,9 @@
 
 ## Creative image details
 
-The gallery now includes contact-sheet borders, frame numbers and an editor's
-note for each image. Use Original / Cinematic / Clean / Bold to compare creative
+The gallery includes contact-sheet borders, frame numbers and a short summary
+for each image. Full descriptions, technique tags and editor's notes appear in
+the project preview. Use Original / Cinematic / Clean / Bold to compare creative
 colour previews. Hover over an image to preview its grade on desktop; the
 Preview grade / Show original button gives touch and keyboard users the same
 comparison. These are CSS treatments of the supplied image, not camera RAW files.
