@@ -1,5 +1,21 @@
 # Images now, videos later
 
+## Creative image details
+
+The gallery now includes contact-sheet borders, frame numbers and an editor's
+note for each image. Use Original / Cinematic / Clean / Bold to compare creative
+colour previews. Hover over an image to preview its grade on desktop; the
+Preview grade / Show original button gives touch and keyboard users the same
+comparison. These are CSS treatments of the supplied image, not camera RAW files.
+
+Open a project to explore two crops of the same image and a manually curated
+palette. Notes, palettes and crop positions live in `js/creative-details.js`;
+they follow the six projects in gallery order. New images and additional projects
+should get corresponding entries there. Theme colours remain unchanged.
+
+The image moodboard and mood controls are hidden for a project with `data-video`
+set. Its video player continues to use the existing image as the poster.
+
 All hero tiles and gallery projects display the existing images. No video is
 required. Clicking a gallery image opens a larger preview with its description,
 creative techniques, and software. The original blue/purple light theme stays.

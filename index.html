@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/creative.css">
   <link rel="stylesheet" href="css/art-direction.css">
+  <link rel="stylesheet" href="css/creative-details.css">
 </head>
 <body>
   <a class="skip-link" href="#portfolio">Skip to selected work</a>
@@ -218,6 +219,11 @@
         </div>
 
         <!-- Projects Grid -->
+        <div class="mood-toolbar" role="group" aria-label="Gallery image mood">
+          <div><span class="detail-eyebrow">THE CONTACT SHEET</span><p>Choose the mood. Explore the details.</p></div>
+          <div class="mood-options"><button type="button" data-gallery-mood="original" aria-pressed="true">Original</button><button type="button" data-gallery-mood="cinematic" aria-pressed="false">Cinematic</button><button type="button" data-gallery-mood="clean" aria-pressed="false">Clean</button><button type="button" data-gallery-mood="bold" aria-pressed="false">Bold</button></div>
+          <span class="mood-help">Creative colour previews using the existing images.</span>
+        </div>
         <div class="projects-grid" id="projects-grid">
           
           <!-- Project 1: Commercial (16:9) -->
@@ -884,6 +890,12 @@
   <div class="image-lightbox-window">
     <div class="image-lightbox-header"><div><p id="image-lightbox-category"></p><h2 id="image-lightbox-title"></h2></div><button type="button" id="image-lightbox-close" aria-label="Close image preview">×</button></div>
     <img id="image-lightbox-photo" alt="">
+    <div class="lightbox-moods" id="lightbox-moods" role="group" aria-label="Project image mood" hidden><span class="detail-eyebrow">CHOOSE THE MOOD</span><div class="mood-options"><button type="button" data-project-mood="original" aria-pressed="true">Original</button><button type="button" data-project-mood="cinematic" aria-pressed="false">Cinematic</button><button type="button" data-project-mood="clean" aria-pressed="false">Clean</button><button type="button" data-project-mood="bold" aria-pressed="false">Bold</button></div><span id="mood-readout" role="status">Original image</span></div>
+    <section class="project-moodboard" id="project-moodboard" aria-label="Project moodboard" hidden>
+      <div class="moodboard-top"><span class="detail-eyebrow">THE MOODBOARD</span><span>01 / COMPOSITION · 02 / TEXTURE · 03 / PALETTE</span></div>
+      <div class="moodboard-grid"><figure><div class="detail-crop crop-composition"><img id="moodboard-composition" alt="" loading="lazy"></div><figcaption>01 / COMPOSITION STUDY</figcaption></figure><figure><div class="detail-crop crop-texture"><img id="moodboard-texture" alt="" loading="lazy"></div><figcaption>02 / DETAIL STUDY</figcaption></figure><div class="palette-study"><span class="detail-eyebrow">COLOUR DIRECTION</span><div id="project-palette" class="project-palette" role="list" aria-label="Curated project colour palette"></div><p>A curated palette inspired by this frame.</p></div></div>
+      <div class="moodboard-note"><span class="detail-eyebrow">EDITOR’S NOTE / WHY THIS FRAME?</span><p id="moodboard-note"></p></div>
+    </section>
     <video id="project-video" controls playsinline preload="none" tabindex="0" aria-label="Project video" hidden></video>
     <p class="media-status" id="media-status" role="status" hidden></p>
     <div class="project-story" id="project-story" hidden>
@@ -903,6 +915,7 @@
   <a class="back-to-top" href="#hero" aria-label="Back to top">↑</a>
   <!-- Main JavaScript File -->
   <script src="js/main.js"></script>
+  <script src="js/creative-details.js"></script>
 </body>
 </html>
 
